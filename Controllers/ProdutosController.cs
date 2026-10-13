@@ -124,6 +124,20 @@ namespace EstoqueApi.Controllers
 
             return Ok(produto);
         }
+
+        // DELETE: api/Produtos/1
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            if (!_produtos.ContainsKey(id))
+            {
+                return NotFound("Produto não encontrado.");
+            }
+
+            _produtos.Remove(id);
+
+            return NoContent();
+        }
     }
 
     // Esta classe recebe os dados enviados no corpo da requisição

@@ -59,6 +59,8 @@ namespace EstoqueApi.Models
             }
         }
 
+        public decimal ValorEmEstoque => Preco * Quantidade;
+
         public bool AdicionarEstoque(int quantidade)
         {
             if (quantidade <= 0)

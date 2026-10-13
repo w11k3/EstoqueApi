@@ -106,6 +106,42 @@ Porque a validação faz parte das regras da classe `Produto`. Dessa forma, o pr
 | Listar produtos | HTTP `200 OK`, incluindo `DataValidade` para perecíveis e `GarantiaMeses` para eletrônicos. | Preencher após testar |
 | Buscar produto com ID inexistente (`99`) | HTTP `404 Not Found`. | Preencher após testar |
 
+## 7. Desafio extra — Implementações
+
+### DELETE `/api/produtos/{id}`
+
+Endpoint para remover um produto pelo seu ID.
+
+- Retorna `204 No Content` quando a exclusão é realizada.
+- Retorna `404 Not Found` quando o produto não existe.
+
+### Propriedade `ValorEmEstoque`
+
+Propriedade somente de leitura da classe `Produto`, calculada pela multiplicação do preço pela quantidade disponível.
+
+```csharp
+public decimal ValorEmEstoque => Preco * Quantidade;
+```
+
+**Teste realizado:** notebook com preço de R$ 3.500,00 e 10 unidades em estoque.
+
+Resultado esperado e obtido: `35000`.
+
+### Propriedade `Vencido`
+
+Propriedade somente de leitura da classe `ProdutoPerecivel`, que retorna `true` quando a data de validade é anterior à data atual.
+
+```csharp
+public bool Vencido => DataValidade.Date < DateTime.Today;
+```
+
+**Testes realizados:**
+
+- Leite com validade em 12/10/2026: `true`.
+- Iogurte com validade em 20/10/2026: `false`.
+
+Os resultados obtidos corresponderam aos resultados esperados.
+
 ## Author
 
 **Willian Kauê da Cruz Campos**
